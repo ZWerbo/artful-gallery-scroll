@@ -1,84 +1,140 @@
+import { Palette, Camera, User, ChevronDown, ChevronRight } from 'lucide-react';
+import { NavLink, useLocation } from 'react-router-dom';
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubItem,
+  SidebarMenuSubButton,
+  useSidebar,
+} from '@/components/ui/sidebar';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
 const Navigation = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { state } = useSidebar();
   const location = useLocation();
+  const [paintingsOpen, setPaintingsOpen] = useState(true);
+  const [photographyOpen, setPhotographyOpen] = useState(false);
 
-  const navItems = [
-    { path: '/', label: 'Home' },
-    { path: '/strangers', label: 'Sometimes I miss strangers' },
-    { path: '/collages', label: 'Collages' },
-    { path: '/photography', label: 'Photography' },
-    { path: '/bio', label: 'Artist CV/BIO' },
+  const collapsed = state === 'collapsed';
+  const isActive = (path: string) => location.pathname === path;
+  
+  const paintingsItems = [
+    { path: '/paintings/strangers', label: 'Sometimes I miss strangers' },
+    { path: '/paintings/collages', label: 'Collages' },
   ];
 
-  const isActive = (path: string) => location.pathname === path;
+  const photographyItems = [
+    { path: '/photography/series-1', label: 'Series 1' },
+    { path: '/photography/series-2', label: 'Series 2' },
+  ];
 
   return (
-    <>
-      {/* Desktop Navigation */}
-      <nav className="hidden md:block fixed top-0 left-0 w-full z-50 bg-background/80 backdrop-blur-sm border-b border-border">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <Link to="/" className="text-xl font-light tracking-wide">
-              Artist Portfolio
-            </Link>
-            <div className="flex space-x-8">
-              {navItems.slice(1).map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`text-sm font-light tracking-wide transition-colors duration-300 hover:text-primary ${
-                    isActive(item.path) ? 'text-primary' : 'text-muted-foreground'
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      {/* Mobile Navigation */}
-      <nav className="md:hidden fixed top-0 left-0 w-full z-50 bg-background/90 backdrop-blur-sm border-b border-border">
-        <div className="px-4 py-3 flex justify-between items-center">
-          <Link to="/" className="text-lg font-light tracking-wide">
+    <Sidebar className={collapsed ? "w-14" : "w-64"} collapsible="icon">
+      <SidebarContent>
+        <div className="p-4">
+          <h1 className={`font-light tracking-wide transition-opacity duration-200 ${collapsed ? 'opacity-0' : 'opacity-100'}`}>
             Artist Portfolio
-          </Link>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setIsOpen(!isOpen)}
-            className="p-2"
-          >
-            {isOpen ? <X size={20} /> : <Menu size={20} />}
-          </Button>
+          </h1>
         </div>
-        
-        {isOpen && (
-          <div className="bg-background border-b border-border animate-fade-in">
-            <div className="px-4 py-4 space-y-4">
-              {navItems.slice(1).map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`block text-sm font-light tracking-wide transition-colors duration-300 hover:text-primary ${
-                    isActive(item.path) ? 'text-primary' : 'text-muted-foreground'
-                  }`}
-                  onClick={() => setIsOpen(false)}
+
+        <SidebarGroup>
+          <SidebarMenu>
+            {/* Paintings Section */}
+            <SidebarMenuItem>
+              <Collapsible open={paintingsOpen} onOpenChange={setPaintingsOpen}>
+                <CollapsibleTrigger asChild>
+                  <SidebarMenuButton className="w-full justify-between">
+                    <div className="flex items-center">
+                      <Palette className="mr-2 h-4 w-4" />
+                      {!collapsed && <span>Paintings</span>}
+                    </div>
+                    {!collapsed && (
+                      paintingsOpen ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />
+                    )}
+                  </SidebarMenuButton>
+                </CollapsibleTrigger>
+                <CollapsibleContent>
+                  <SidebarMenuSub>
+                    {paintingsItems.map((item) => (
+                      <SidebarMenuSubItem key={item.path}>
+                        <SidebarMenuSubButton asChild>
+                          <NavLink
+                            to={item.path}
+                            className={({ isActive }) =>
+                              `w-full ${isActive ? 'bg-accent text-accent-foreground' : 'hover:bg-accent/50'}`
+                            }
+                          >
+                            {!collapsed && <span className="ml-4">{item.label}</span>}
+                          </NavLink>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                    ))}
+                  </SidebarMenuSub>
+                </CollapsibleContent>
+              </Collapsible>
+            </SidebarMenuItem>
+
+            {/* Photography Section */}
+            <SidebarMenuItem>
+              <Collapsible open={photographyOpen} onOpenChange={setPhotographyOpen}>
+                <CollapsibleTrigger asChild>
+                  <SidebarMenuButton className="w-full justify-between">
+                    <div className="flex items-center">
+                      <Camera className="mr-2 h-4 w-4" />
+                      {!collapsed && <span>Photography</span>}
+                    </div>
+                    {!collapsed && (
+                      photographyOpen ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />
+                    )}
+                  </SidebarMenuButton>
+                </CollapsibleTrigger>
+                <CollapsibleContent>
+                  <SidebarMenuSub>
+                    {photographyItems.map((item) => (
+                      <SidebarMenuSubItem key={item.path}>
+                        <SidebarMenuSubButton asChild>
+                          <NavLink
+                            to={item.path}
+                            className={({ isActive }) =>
+                              `w-full ${isActive ? 'bg-accent text-accent-foreground' : 'hover:bg-accent/50'}`
+                            }
+                          >
+                            {!collapsed && <span className="ml-4">{item.label}</span>}
+                          </NavLink>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                    ))}
+                  </SidebarMenuSub>
+                </CollapsibleContent>
+              </Collapsible>
+            </SidebarMenuItem>
+
+            {/* Artist CV/BIO */}
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <NavLink
+                  to="/bio"
+                  className={({ isActive }) =>
+                    `w-full ${isActive ? 'bg-accent text-accent-foreground' : 'hover:bg-accent/50'}`
+                  }
                 >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
-      </nav>
-    </>
+                  <User className="mr-2 h-4 w-4" />
+                  {!collapsed && <span>Artist CV/BIO</span>}
+                </NavLink>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroup>
+      </SidebarContent>
+    </Sidebar>
   );
 };
 
