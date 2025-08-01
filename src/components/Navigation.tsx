@@ -1,30 +1,17 @@
 import { Palette, Camera, User, ChevronDown, ChevronRight } from 'lucide-react';
-import { NavLink, useLocation } from 'react-router-dom';
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubItem,
-  SidebarMenuSubButton,
-  useSidebar,
-} from '@/components/ui/sidebar';
+import { NavLink } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { useState } from 'react';
 
-const Navigation = () => {
-  const { state } = useSidebar();
-  const location = useLocation();
+interface NavigationProps {
+  collapsed?: boolean;
+  onToggle?: () => void;
+}
+
+const Navigation = ({ collapsed = false, onToggle }: NavigationProps) => {
   const [paintingsOpen, setPaintingsOpen] = useState(true);
   const [photographyOpen, setPhotographyOpen] = useState(false);
-
-  const collapsed = state === 'collapsed';
-  const isActive = (path: string) => location.pathname === path;
   
   const paintingsItems = [
     { path: '/paintings/strangers', label: 'Sometimes I miss strangers' },
@@ -37,104 +24,103 @@ const Navigation = () => {
   ];
 
   return (
-    <Sidebar className={collapsed ? "w-14" : "w-64"} collapsible="icon">
-      <SidebarContent>
-        <div className="p-4">
-          <h1 className={`font-light tracking-wide transition-opacity duration-200 ${collapsed ? 'opacity-0' : 'opacity-100'}`}>
-            Artist Portfolio
-          </h1>
+    <div className={`${collapsed ? 'w-16' : 'w-64'} bg-background border-r border-border h-full transition-all duration-300`}>
+      {/* Header */}
+      <div className="p-4 border-b border-border flex items-center justify-between">
+        <h1 className={`font-light tracking-wide transition-opacity duration-200 ${collapsed ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100'}`}>
+          Artist Portfolio
+        </h1>
+        {onToggle && (
+          <Button variant="ghost" size="sm" onClick={onToggle} className="h-8 w-8 p-0">
+            <ChevronRight className={`h-4 w-4 transition-transform duration-200 ${collapsed ? 'rotate-0' : 'rotate-180'}`} />
+          </Button>
+        )}
+      </div>
+
+      {/* Navigation Menu */}
+      <div className="p-4 space-y-2">
+        {/* Paintings Section */}
+        <div>
+          <Collapsible open={paintingsOpen} onOpenChange={setPaintingsOpen}>
+            <CollapsibleTrigger asChild>
+              <Button variant="ghost" className="w-full justify-between p-2 h-auto">
+                <div className="flex items-center">
+                  <Palette className="h-4 w-4 mr-2 flex-shrink-0" />
+                  {!collapsed && <span className="text-sm">Paintings</span>}
+                </div>
+                {!collapsed && (
+                  paintingsOpen ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />
+                )}
+              </Button>
+            </CollapsibleTrigger>
+            {!collapsed && (
+              <CollapsibleContent className="ml-6 mt-1 space-y-1">
+                {paintingsItems.map((item) => (
+                  <NavLink
+                    key={item.path}
+                    to={item.path}
+                    className={({ isActive }) =>
+                      `block px-2 py-1 text-xs rounded transition-colors ${
+                        isActive ? 'bg-accent text-accent-foreground' : 'hover:bg-accent/50'
+                      }`
+                    }
+                  >
+                    {item.label}
+                  </NavLink>
+                ))}
+              </CollapsibleContent>
+            )}
+          </Collapsible>
         </div>
 
-        <SidebarGroup>
-          <SidebarMenu>
-            {/* Paintings Section */}
-            <SidebarMenuItem>
-              <Collapsible open={paintingsOpen} onOpenChange={setPaintingsOpen}>
-                <CollapsibleTrigger asChild>
-                  <SidebarMenuButton className="w-full justify-between">
-                    <div className="flex items-center">
-                      <Palette className="mr-2 h-4 w-4" />
-                      {!collapsed && <span>Paintings</span>}
-                    </div>
-                    {!collapsed && (
-                      paintingsOpen ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />
-                    )}
-                  </SidebarMenuButton>
-                </CollapsibleTrigger>
-                <CollapsibleContent>
-                  <SidebarMenuSub>
-                    {paintingsItems.map((item) => (
-                      <SidebarMenuSubItem key={item.path}>
-                        <SidebarMenuSubButton asChild>
-                          <NavLink
-                            to={item.path}
-                            className={({ isActive }) =>
-                              `w-full ${isActive ? 'bg-accent text-accent-foreground' : 'hover:bg-accent/50'}`
-                            }
-                          >
-                            {!collapsed && <span className="ml-4">{item.label}</span>}
-                          </NavLink>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
-                    ))}
-                  </SidebarMenuSub>
-                </CollapsibleContent>
-              </Collapsible>
-            </SidebarMenuItem>
+        {/* Photography Section */}
+        <div>
+          <Collapsible open={photographyOpen} onOpenChange={setPhotographyOpen}>
+            <CollapsibleTrigger asChild>
+              <Button variant="ghost" className="w-full justify-between p-2 h-auto">
+                <div className="flex items-center">
+                  <Camera className="h-4 w-4 mr-2 flex-shrink-0" />
+                  {!collapsed && <span className="text-sm">Photography</span>}
+                </div>
+                {!collapsed && (
+                  photographyOpen ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />
+                )}
+              </Button>
+            </CollapsibleTrigger>
+            {!collapsed && (
+              <CollapsibleContent className="ml-6 mt-1 space-y-1">
+                {photographyItems.map((item) => (
+                  <NavLink
+                    key={item.path}
+                    to={item.path}
+                    className={({ isActive }) =>
+                      `block px-2 py-1 text-xs rounded transition-colors ${
+                        isActive ? 'bg-accent text-accent-foreground' : 'hover:bg-accent/50'
+                      }`
+                    }
+                  >
+                    {item.label}
+                  </NavLink>
+                ))}
+              </CollapsibleContent>
+            )}
+          </Collapsible>
+        </div>
 
-            {/* Photography Section */}
-            <SidebarMenuItem>
-              <Collapsible open={photographyOpen} onOpenChange={setPhotographyOpen}>
-                <CollapsibleTrigger asChild>
-                  <SidebarMenuButton className="w-full justify-between">
-                    <div className="flex items-center">
-                      <Camera className="mr-2 h-4 w-4" />
-                      {!collapsed && <span>Photography</span>}
-                    </div>
-                    {!collapsed && (
-                      photographyOpen ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />
-                    )}
-                  </SidebarMenuButton>
-                </CollapsibleTrigger>
-                <CollapsibleContent>
-                  <SidebarMenuSub>
-                    {photographyItems.map((item) => (
-                      <SidebarMenuSubItem key={item.path}>
-                        <SidebarMenuSubButton asChild>
-                          <NavLink
-                            to={item.path}
-                            className={({ isActive }) =>
-                              `w-full ${isActive ? 'bg-accent text-accent-foreground' : 'hover:bg-accent/50'}`
-                            }
-                          >
-                            {!collapsed && <span className="ml-4">{item.label}</span>}
-                          </NavLink>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
-                    ))}
-                  </SidebarMenuSub>
-                </CollapsibleContent>
-              </Collapsible>
-            </SidebarMenuItem>
-
-            {/* Artist CV/BIO */}
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild>
-                <NavLink
-                  to="/bio"
-                  className={({ isActive }) =>
-                    `w-full ${isActive ? 'bg-accent text-accent-foreground' : 'hover:bg-accent/50'}`
-                  }
-                >
-                  <User className="mr-2 h-4 w-4" />
-                  {!collapsed && <span>Artist CV/BIO</span>}
-                </NavLink>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarGroup>
-      </SidebarContent>
-    </Sidebar>
+        {/* Artist CV/BIO */}
+        <NavLink
+          to="/bio"
+          className={({ isActive }) =>
+            `flex items-center px-2 py-2 rounded transition-colors ${
+              isActive ? 'bg-accent text-accent-foreground' : 'hover:bg-accent/50'
+            }`
+          }
+        >
+          <User className="h-4 w-4 mr-2 flex-shrink-0" />
+          {!collapsed && <span className="text-sm">Artist CV/BIO</span>}
+        </NavLink>
+      </div>
+    </div>
   );
 };
 
