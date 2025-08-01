@@ -23,8 +23,8 @@ const App = () => (
             <Route path="/" element={<Navigate to="/paintings/strangers" replace />} />
             <Route path="/paintings/strangers" element={<Strangers />} />
             <Route path="/paintings/collages" element={<Collages />} />
-            <Route path="/photography/series-1" element={<Photography />} />
-            <Route path="/photography/series-2" element={<Photography />} />
+            <Route path="/photography/bizzarro-incognito" element={<Photography />} />
+            <Route path="/photography/east-west-between" element={<Photography />} />
             <Route path="/bio" element={<Bio />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

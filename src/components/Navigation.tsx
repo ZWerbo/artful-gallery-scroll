@@ -1,19 +1,13 @@
-
 import { NavLink } from 'react-router-dom';
 
-interface NavigationProps {
-  collapsed?: boolean;
-  onToggle?: () => void;
-}
-
-const Navigation = ({ collapsed = false }: NavigationProps) => {
+const Navigation = () => {
   return (
-    <div className={`${collapsed ? 'w-16' : 'w-64'} bg-background border-r border-border h-screen sticky top-0 transition-all duration-300 overflow-y-auto`}>
+    <div className="w-64 bg-background border-r border-border h-screen sticky top-0 overflow-y-auto">
       <div className="p-6">
-        {/* BOOK WORK Section */}
+        {/* Paintings Section */}
         <div className="mb-8">
           <h3 className="text-sm font-medium tracking-wide text-muted-foreground uppercase mb-4">
-            {!collapsed && "BOOK WORK"}
+            Paintings
           </h3>
           <div className="space-y-3">
             <NavLink
@@ -21,75 +15,57 @@ const Navigation = ({ collapsed = false }: NavigationProps) => {
               className={({ isActive }) =>
                 `block text-foreground hover:text-primary transition-colors ${
                   isActive ? 'text-primary font-medium' : ''
-                } ${collapsed ? 'text-center' : ''}`
+                }`
               }
             >
-              {collapsed ? 'S' : 'Sometimes I miss strangers'}
+              Sometimes I miss strangers
             </NavLink>
             <NavLink
               to="/paintings/collages"
               className={({ isActive }) =>
                 `block text-foreground hover:text-primary transition-colors ${
                   isActive ? 'text-primary font-medium' : ''
-                } ${collapsed ? 'text-center' : ''}`
+                }`
               }
             >
-              {collapsed ? 'C' : 'Collages'}
+              Collages
             </NavLink>
           </div>
         </div>
 
-        {/* COMMISSIONED WORK Section */}
+        {/* Photography Section */}
         <div className="mb-8">
           <h3 className="text-sm font-medium tracking-wide text-muted-foreground uppercase mb-4">
-            {!collapsed && "COMMISSIONED WORK"}
+            Photography
           </h3>
           <div className="space-y-3">
             <NavLink
-              to="/photography/series-1"
+              to="/photography/bizzarro-incognito"
               className={({ isActive }) =>
                 `block text-foreground hover:text-primary transition-colors ${
                   isActive ? 'text-primary font-medium' : ''
-                } ${collapsed ? 'text-center' : ''}`
+                }`
               }
             >
-              {collapsed ? 'P' : 'Portraits'}
+              Bizzarro incognito
             </NavLink>
             <NavLink
-              to="/photography/series-2"
+              to="/photography/east-west-between"
               className={({ isActive }) =>
                 `block text-foreground hover:text-primary transition-colors ${
                   isActive ? 'text-primary font-medium' : ''
-                } ${collapsed ? 'text-center' : ''}`
+                }`
               }
             >
-              {collapsed ? 'L' : 'Landscapes'}
+              East, west, and in between
             </NavLink>
           </div>
         </div>
 
-        {/* ONGOING PROJECT WORK Section */}
+        {/* Info Section */}
         <div className="mb-8">
           <h3 className="text-sm font-medium tracking-wide text-muted-foreground uppercase mb-4">
-            {!collapsed && "ONGOING PROJECT WORK"}
-          </h3>
-          <div className="space-y-3">
-            <div className="text-foreground">
-              {collapsed ? 'A' : 'A Song Within A Song'}
-            </div>
-            <div className="text-foreground">
-              {collapsed ? 'B' : 'Bird Song Over Black Water'}
-            </div>
-            <div className="text-foreground">
-              {collapsed ? 'E' : 'Entropy Epicenter'}
-            </div>
-          </div>
-        </div>
-
-        {/* INFO Section */}
-        <div className="mb-8">
-          <h3 className="text-sm font-medium tracking-wide text-muted-foreground uppercase mb-4">
-            {!collapsed && "INFO"}
+            Info
           </h3>
           <div className="space-y-3">
             <NavLink
@@ -97,10 +73,10 @@ const Navigation = ({ collapsed = false }: NavigationProps) => {
               className={({ isActive }) =>
                 `block text-foreground hover:text-primary transition-colors ${
                   isActive ? 'text-primary font-medium' : ''
-                } ${collapsed ? 'text-center' : ''}`
+                }`
               }
             >
-              {collapsed ? 'CV' : 'Artist CV/BIO'}
+              Artist CV/BIO
             </NavLink>
           </div>
         </div>
