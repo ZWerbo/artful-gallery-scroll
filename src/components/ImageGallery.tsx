@@ -72,9 +72,9 @@ const ImageGallery = ({ images, title }: ImageGalleryProps) => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="pt-20 pb-8 px-6">
+      <div className="pt-6 pb-4 px-6">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-2xl md:text-3xl font-light tracking-wide text-center mb-4">
+          <h1 className="text-2xl md:text-3xl font-light tracking-wide text-center mb-2">
             {title}
           </h1>
           <div className="text-center text-sm text-muted-foreground font-light">
@@ -84,7 +84,7 @@ const ImageGallery = ({ images, title }: ImageGalleryProps) => {
       </div>
 
       {/* Main Image Display */}
-      <div className="relative flex-1 flex items-center justify-center px-6 pb-20">
+      <div className="relative flex-1 flex items-center justify-center px-6 pb-8">
         <div className="relative max-w-5xl w-full">
           {/* Loading State */}
           {isLoading && (
