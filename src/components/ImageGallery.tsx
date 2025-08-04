@@ -136,12 +136,6 @@ const ImageGallery = ({ images, title }: ImageGalleryProps) => {
         </div>
       </div>
 
-      {/* Navigation Instructions */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 text-xs text-muted-foreground text-center">
-        <div className="bg-background/90 backdrop-blur-sm px-4 py-2 rounded-sm border border-border">
-          Use arrow keys or click to navigate
-        </div>
-      </div>
     </div>
   );
 };

@@ -1,8 +1,37 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 const Navigation = () => {
+  const location = useLocation();
+  
+  const getCurrentTitle = () => {
+    switch (location.pathname) {
+      case '/paintings/strangers':
+        return 'Sometimes I miss strangers';
+      case '/paintings/collages':
+        return 'Collages';
+      case '/photography/bizzarro-incognito':
+        return 'Bizzarro incognito';
+      case '/photography/east-west-between':
+        return 'East, west, and in between';
+      case '/bio':
+        return 'Artist CV/BIO';
+      default:
+        return '';
+    }
+  };
+
   return (
     <div className="w-64 bg-background border-r border-border h-screen sticky top-0 overflow-y-auto">
+      {/* Header with name and current title */}
+      <div className="p-6 border-b border-border">
+        <h1 className="text-lg font-light tracking-wide mb-2">Zach Werb</h1>
+        {getCurrentTitle() && (
+          <div className="text-sm text-muted-foreground font-light">
+            {getCurrentTitle()}
+          </div>
+        )}
+      </div>
+      
       <div className="p-6">
         {/* Paintings Section */}
         <div className="mb-8">
