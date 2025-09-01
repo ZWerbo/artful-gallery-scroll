@@ -1,7 +1,7 @@
 import ImageGallery from '@/components/ImageGallery';
-import gallery1 from '@/assets/gallery-1.jpg';
+import gallery1 from '@/assets/Strangers-1.jpg';
 import gallery2 from '@/assets/gallery-2.jpg';
-import gallery3 from '@/assets/gallery-3.jpg';
+import gallery3 from '@/assets/Strangers-1.jpg';
 
 const Strangers = () => {
   const images = [
