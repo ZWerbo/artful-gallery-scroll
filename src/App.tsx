@@ -6,7 +6,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Strangers from "./pages/Strangers";
 import Collages from "./pages/Collages";
-import Photography from "./pages/Photography";
+import BizzarroIncognito from "./pages/BizzarroIncognito";
+import EastWestBetween from "./pages/EastWestBetween";
 import Bio from "./pages/Bio";
 import NotFound from "./pages/NotFound";
 
@@ -23,8 +24,8 @@ const App = () => (
             <Route path="/" element={<Navigate to="/paintings/strangers" replace />} />
             <Route path="/paintings/strangers" element={<Strangers />} />
             <Route path="/paintings/collages" element={<Collages />} />
-            <Route path="/photography/bizzarro-incognito" element={<Photography />} />
-            <Route path="/photography/east-west-between" element={<Photography />} />
+            <Route path="/photography/bizzarro-incognito" element={<BizzarroIncognito />} />
+            <Route path="/photography/east-west-between" element={<EastWestBetween />} />
             <Route path="/bio" element={<Bio />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
