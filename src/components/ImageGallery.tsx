@@ -70,9 +70,9 @@ const ImageGallery = ({ images, title }: ImageGalleryProps) => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <div className="pt-6 pb-4 px-6">
+    <div className="h-full bg-background">
+      {/* Desktop Header */}
+      <div className="hidden md:block pt-6 pb-4 px-6">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-2xl md:text-3xl font-light tracking-wide text-center mb-2">
             {title}
@@ -83,58 +83,65 @@ const ImageGallery = ({ images, title }: ImageGalleryProps) => {
         </div>
       </div>
 
+      {/* Mobile Header */}
+      <div className="md:hidden p-2 bg-background/95 backdrop-blur-sm border-b border-border">
+        <div className="text-center text-xs text-muted-foreground font-light">
+          {currentIndex + 1} of {images.length}
+        </div>
+      </div>
+
       {/* Main Image Display */}
-      <div className="relative flex-1 flex items-center justify-center px-6 pb-8">
-        <div className="relative max-w-5xl w-full">
+      <div className="relative flex-1 flex items-center justify-center px-2 md:px-6 pb-2 md:pb-8 h-full">
+        <div className="relative w-full h-full flex items-center justify-center">
           {/* Loading State */}
           {isLoading && (
             <div className="absolute inset-0 flex items-center justify-center bg-muted/20 animate-pulse">
-              <div className="w-16 h-16 border-2 border-muted-foreground/20 border-t-primary rounded-full animate-spin" />
+              <div className="w-8 h-8 md:w-16 md:h-16 border-2 border-muted-foreground/20 border-t-primary rounded-full animate-spin" />
             </div>
           )}
 
           {/* Image */}
-          <div className={`relative transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}>
+          <div className={`relative transition-opacity duration-500 w-full h-full flex items-center justify-center ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}>
             <img
               src={currentImage.src}
               alt={currentImage.alt}
-              className="w-full h-auto max-h-[80vh] object-contain animate-gallery-enter"
+              className="w-full h-full object-contain animate-gallery-enter"
               onLoad={handleImageLoad}
               onLoadStart={() => setIsLoading(true)}
             />
-            
-            {/* Image Title */}
-            {currentImage.title && (
-              <div className="mt-6 text-center">
-                <h2 className="text-lg font-light text-muted-foreground tracking-wide">
-                  {currentImage.title}
-                </h2>
-              </div>
-            )}
           </div>
 
           {/* Navigation Buttons */}
           <Button
             variant="ghost"
-            size="lg"
+            size="sm"
             onClick={prevImage}
-            className="absolute left-4 top-1/2 -translate-y-1/2 opacity-60 hover:opacity-100 transition-opacity duration-300"
+            className="absolute left-2 top-1/2 -translate-y-1/2 opacity-60 hover:opacity-100 transition-opacity duration-300 md:size-lg md:left-4"
             disabled={images.length <= 1}
           >
-            <ChevronLeft size={24} />
+            <ChevronLeft size={16} className="md:w-6 md:h-6" />
           </Button>
 
           <Button
             variant="ghost"
-            size="lg"
+            size="sm"
             onClick={nextImage}
-            className="absolute right-4 top-1/2 -translate-y-1/2 opacity-60 hover:opacity-100 transition-opacity duration-300"
+            className="absolute right-2 top-1/2 -translate-y-1/2 opacity-60 hover:opacity-100 transition-opacity duration-300 md:size-lg md:right-4"
             disabled={images.length <= 1}
           >
-            <ChevronRight size={24} />
+            <ChevronRight size={16} className="md:w-6 md:h-6" />
           </Button>
         </div>
       </div>
+
+      {/* Desktop Image Title */}
+      {currentImage.title && (
+        <div className="hidden md:block pb-6 text-center">
+          <h2 className="text-lg font-light text-muted-foreground tracking-wide">
+            {currentImage.title}
+          </h2>
+        </div>
+      )}
 
     </div>
   );
