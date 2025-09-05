@@ -1,10 +1,10 @@
 import ImageGallery from '@/components/ImageGallery';
-import gallery2 from '@/assets/gallery-2.jpg';
+import spread1 from '@/assets/spread-1.jpg';
 
 const EastWestBetween = () => {
   const images = [
     {
-      src: gallery2,
+      src: spread1,
       alt: 'Contemplative portrait study',
       title: 'Between Worlds, 2024'
     }

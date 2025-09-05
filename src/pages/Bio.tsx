@@ -22,12 +22,10 @@ const Bio = () => {
               <h2 className="text-xl font-medium mb-4 tracking-wide">Education</h2>
               <div className="space-y-3 text-muted-foreground font-light">
                 <div>
-                  <p className="font-medium text-foreground">MFA in Visual Arts</p>
-                  <p>Contemporary Art Institute, 2018</p>
                 </div>
                 <div>
-                  <p className="font-medium text-foreground">BA in Photography</p>
-                  <p>University of Fine Arts, 2015</p>
+                  <p className="font-medium text-foreground">BFA in Printmaking</p>
+                  <p>University of Georgia, 2017</p>
                 </div>
               </div>
             </section>
@@ -36,31 +34,22 @@ const Bio = () => {
               <h2 className="text-xl font-medium mb-4 tracking-wide">Selected Exhibitions</h2>
               <div className="space-y-3 text-muted-foreground font-light">
                 <div>
-                  <p className="font-medium text-foreground">2024 - "Quiet Spaces"</p>
-                  <p>Gallery Modern, Solo Exhibition</p>
+                  <p className="font-medium text-foreground">2024 - "Advil Pm in the afternoon"</p>
+                  <p>Group Exhibition, Portland</p>
                 </div>
                 <div>
-                  <p className="font-medium text-foreground">2023 - "Contemporary Voices"</p>
-                  <p>Municipal Art Center, Group Exhibition</p>
                 </div>
                 <div>
-                  <p className="font-medium text-foreground">2022 - "Memory and Place"</p>
-                  <p>Studio Gallery, Solo Exhibition</p>
                 </div>
                 <div>
-                  <p className="font-medium text-foreground">2021 - "Emerging Artists"</p>
-                  <p>Contemporary Art Fair, Group Exhibition</p>
                 </div>
               </div>
             </section>
 
             <section>
-              <h2 className="text-xl font-medium mb-4 tracking-wide">Collections</h2>
+            <h2 className="text-xl font-medium mb-4 tracking-wide">Collections</h2>
               <div className="space-y-2 text-muted-foreground font-light">
-                <p>Private collections across Europe and North America</p>
-                <p>Municipal Art Collection</p>
-                <p>Contemporary Art Foundation</p>
-              </div>
+              </div> 
             </section>
 
             <section>
