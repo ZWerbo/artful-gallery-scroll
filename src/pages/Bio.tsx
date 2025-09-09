@@ -11,10 +11,7 @@ const Bio = () => {
             <section>
               <h2 className="text-xl font-medium mb-4 tracking-wide">About</h2>
               <p className="text-muted-foreground leading-relaxed font-light">
-                Contemporary visual artist working primarily in photography and mixed media. 
-                My work explores themes of memory, human connection, and the spaces we inhabit, 
-                both physical and emotional. Through a minimalist aesthetic, I aim to capture 
-                the quiet moments that reveal deeper truths about our shared human experience.
+                Contemporary visual artist working primarily through painting and photography. 
               </p>
             </section>
 
@@ -54,12 +51,11 @@ const Bio = () => {
 
             <section>
               <h2 className="text-xl font-medium mb-4 tracking-wide">Artist Statement</h2>
+              <h1>Sometimes I miss Strangers</h1>
               <p className="text-muted-foreground leading-relaxed font-light">
-                "In our increasingly connected yet isolated world, I find myself drawn to the spaces 
-                between people—the moments of recognition, loss, and longing that define our human 
-                experience. My work seeks to capture these ephemeral instances, creating visual 
-                narratives that speak to our universal need for connection while honoring the 
-                beauty found in solitude and reflection."
+                "The paintings are at war with ideas of the past and nostalgia. We world seemingly loves to live in the past,
+                always looking back with rose tinted glasses to a thing that can bring violence to the present. These swans insert themselves into memory
+                to bridge the gap between the real and unreal, the past and the present."
               </p>
             </section>
           </div>
